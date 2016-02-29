@@ -108,7 +108,10 @@ class Message
 
     public function getLength()
     {
-        return mb_strlen($this->message, 'utf-8');
+        if (function_exists('mb_strlen')) {
+            return mb_strlen($this->message, 'utf-8');
+        }
+        return strlen($this->message);
     }
 
     public function __toString()
